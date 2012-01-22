@@ -1,0 +1,13 @@
+<Directory .git>
+    order allow,deny
+    deny from all
+</Directory>
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /~plummer/sra/
+
+RewriteRule ^(system|application|cgi-bin) - [F,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php/$0 [PT,L]
