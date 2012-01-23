@@ -70,15 +70,6 @@ CREATE TABLE user_profiles (
 	contact_any boolean DEFAULT false NOT NULL,
 );
 
-
-CREATE TABLE user (
-    user_id SERIAL PRIMARY KEY NOT NULL,
-    user_name character varying(15) NOT NULL,
-    created timestamp with time zone NOT NULL,
-    password character varying(34) NOT NULL,
-    modified timestamp with time zone NOT NULL,
-    last_login timestamp with time zone NOT NULL
-);
 -- --------------------------------------------------------
 
 --
