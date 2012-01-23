@@ -32,13 +32,15 @@
     <div class="topbar">
       <div class="topbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="#">SRA</a>
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <p class="pull-right">Logged in as <a href="#">username</a></p>
+          <p class="pull-right">
+          <?php echo ( $this->tank_auth->is_logged_in() ) ? 'Logged in as <a href="#">' . $this->session->userdata('username') . '</a>' : anchor('auth/login', 'Login') ; ?>
+          </p>
         </div>
       </div>
     </div>

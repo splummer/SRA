@@ -1,4 +1,3 @@
-<?php $this->load->view('includes/header'); ?>
 <?php
 $login = array(
 	'name'	=> 'login',
@@ -92,4 +91,3 @@ $captcha = array(
 </table>
 <?php echo form_submit('submit', 'Let me in'); ?>
 <?php echo form_close(); ?>
-<?php $this->load->view('includes/footer'); ?>
