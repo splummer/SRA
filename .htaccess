@@ -1,7 +1,3 @@
-<Directory .git>
-    order allow,deny
-    deny from all
-</Directory>
 Options -Indexes
 
 RewriteEngine On

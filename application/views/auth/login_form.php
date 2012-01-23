@@ -1,5 +1,4 @@
 <?php $this->load->view('includes/header'); ?>
-?> 
 <?php
 $login = array(
 	'name'	=> 'login',

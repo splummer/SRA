@@ -53,6 +53,8 @@
             <li><a href="#">Link</a></li>
             <li><a href="#">Link</a></li>
           </ul>
+        </div>
+        <div class="well">
           <h5>Sidebar</h5>
           <ul>
             <li><a href="#">Link</a></li>
@@ -76,5 +78,5 @@
           <p>Vestibulum id ligula porta felis euismod semper. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</p>
           <p><a class="btn primary large">Learn more &raquo;</a></p>
         </div>
-
+        <!-- Template content starts after this -->
 	
