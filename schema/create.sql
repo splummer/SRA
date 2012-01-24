@@ -1,29 +1,4 @@
-﻿CREATE TABLE user (
-    user_id SERIAL PRIMARY KEY NOT NULL,
-    user_name character varying(15) NOT NULL,
-    last_name character varying(25) NOT NULL,
-    first_name character varying(25) NOT NULL,
-    email character varying(35) NOT NULL,
-    nickname character varying(25),
-    address_1 character varying(40),
-    address_2 character varying(40),
-    city character varying(30),
-    state character varying(20),
-    zip character varying(10),
-    country character varying(35),
-    area_code character varying(3),
-    phone3 character varying(3),
-    phone4 character varying(4),
-    over13 boolean DEFAULT true NOT NULL,
-    contact_attend boolean DEFAULT true NOT NULL,
-    contact_any boolean DEFAULT false NOT NULL,
-    created timestamp with time zone NOT NULL,
-    password character varying(34) NOT NULL,
-    modified timestamp with time zone NOT NULL,
-    last_login timestamp with time zone NOT NULL
-);
-
-CREATE TABLE organization (
+﻿CREATE TABLE organization (
     org_id SERIAL PRIMARY KEY NOT NULL,
     org_name character varying(20) NOT NULL,
     location character varying(30),
@@ -35,33 +10,28 @@ CREATE TABLE event (
     event_id SERIAL PRIMARY KEY NOT NULL,
     event_name character varying(40) NOT NULL,
     event_short_name character varying(40) NOT NULL,
-    start_time timestamp with time zone NOT NULL,
-    end_time timestamp with time zone NOT NULL,
-    event_submission boolean DEFAULT false NOT NULL,
+    start_time timestamp with time zone,
+    end_time timestamp with time zone,
+    session_submission boolean DEFAULT false NOT NULL,
     pre_reg boolean DEFAULT false NOT NULL,
     onsite_reg boolean DEFAULT false NOT NULL,
-    active boolean DEFAULT true NOT NULL
 );
 
 CREATE TABLE event_timeslot (
-	fk_con_id integer NOT NULL,
-	timeslot_name character varying(155) PRIMARY KEY NOT NULL,
-	start_time timestamp with time zone NOT NULL,
-	end_time timestamp with time zone NOT NULL
-);
-
-CREATE TABLE event_locations (
+	timeslot_id SERIAL PRIMARY KEY NOT NULL,
 	fk_event_id integer NOT NULL,
-    location_name character varying(45) NOT NULL,
+	timeslot_name character varying(155) NOT NULL,
+	start_time timestamp with time zone NOT NULL,
+	end_time timestamp with time zone NOT NULL 
 );
 
 CREATE TABLE session (
     session_id SERIAL PRIMARY KEY NOT NULL,
-    user_id integer NOT NULL,
+    fk_user_id integer NOT NULL,
     session_title character varying(255) NOT NULL,
     description text,
-    min_players integer,
-    max_players integer,
+    min_attendees integer,
+    max_attendees integer,
     difficulty character varying(15),
     familiarity character varying(10),
     pregen_chars boolean,
@@ -71,38 +41,59 @@ CREATE TABLE session (
     notes text,
     created timestamp with time zone,
     modified timestamp with time zone,
-    num_of_tables integer,
-    num_of_timeslots integer,
     maturity character(1),
     event_type character varying(25),
-    approved boolean DEFAULT false,
+    approved boolean DEFAULT false, //should be an event specific flag
     show_change boolean DEFAULT false,
-    featured boolean DEFAULT false,
-    cancelled boolean DEFAULT false,
-    change_description character varying(300),
+    featured boolean DEFAULT false, // should be an event specific flag
     display_org boolean DEFAULT false
 );
 
+CREATE session_change_log {
+	session_change_log_id SERIAL PRIMARY KEY NOT NULL,
+	fk_session_id integer NOT NULL,
+	fk_user_id integer NOT NULL,
+    change_description text,
+	created timestamp with time zone DEFAULT now(),	
+};
+
 CREATE TABLE event_session (
+	event_session_id SERIAL PRIMARY KEY NOT NULL,
 	fk_event_id integer NOT NULL,
-	fk_session_id integer NOT NULL
-	fk_location_name character varying(45) NOT NULL
+	fk_session_id integer NOT NULL,
+	fk_resource_id integer NOT NULL,
+	fk_timeslot_id integer,
+	start_time timestamp with time zone NOT NULL,
+	end_time timestamp with time zone NOT NULL,
+    cancelled boolean DEFAULT false,
 );
 
+CREATE TABLE gm (
+	gm_id SERIAL integer PRIMARY KEY NOT NULL,
+	event_session_id integer NOT NULL,
+	fk_user_id integer NOT NULL
+);
+
+CREATE TABLE event_resources (
+	resource_id SERIAL PRIMARY KEY NOT NULL,
+	resource_type character varying (45) NOT NULL,
+    resource_name character varying(155) NOT NULL
+);
 
 CREATE TABLE role (
     role_id SERIAL PRIMARY KEY NOT NULL,
-    role_name character varying(100) NOT NULL
+    role_name character varying(100) NOT NULL,
+    Description character varying (255)
 );
-
 
 CREATE TABLE permission (
     perm_id SERIAL PRIMARY KEY NOT NULL,
-    perm_name character varying(15) NOT NULL
+    perm_name character varying(15) NOT NULL,
+    description character varying (255)
 );
 
-
 CREATE TABLE rp_lookup (
+	rp_lookup_id SERIAL integer NOT NULL,
     fk_role_id integer NOT NULL,
     fk_perm_id integer NOT NULL
 );
@@ -111,8 +102,9 @@ CREATE TABLE uco_role_lookup (
     fk_user_id integer,
     fk_event_id integer,
     fk_org_id integer,
-    fk_role_id integer
+    fk_role_id integer NOT NULL
 );
+
 
 COMMENT ON COLUMN convention.con_name IS 'Convention name in long form';
 
