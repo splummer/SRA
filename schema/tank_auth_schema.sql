@@ -23,7 +23,7 @@ CREATE TABLE login_attempts (
   id serial PRIMARY KEY,
   ip_address inet  NOT NULL,
   login varchar(50)  NOT NULL,
-  time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE user_autologin (
   user_id integer NOT NULL DEFAULT '0',
   user_agent varchar(150)  NOT NULL,
   last_ip inet  NOT NULL,
-  last_login timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  last_login timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (key_id,user_id)
 );
 
@@ -60,14 +60,13 @@ CREATE TABLE user_profiles (
 	state character varying(20),
 	zip character varying(10),
 	country character varying(35),
-	area_code character varying(3),
-	phone3 character varying(3),
-	phone4 character varying(4),
+	phone character varying(12),
 	website varchar(255)  DEFAULT NULL
 	twitter varchar(30),
 	over13 boolean DEFAULT true NOT NULL,
 	contact_attend boolean DEFAULT true NOT NULL,
 	contact_any boolean DEFAULT false NOT NULL,
+	contact_external boolean DEFAULT false NOT NULL,
 );
 
 -- --------------------------------------------------------
@@ -89,9 +88,9 @@ CREATE TABLE users (
   new_email varchar(100)  DEFAULT NULL,
   new_email_key varchar(50)  DEFAULT NULL,
   last_ip inet  NOT NULL,
-  last_login timestamp DEFAULT CURRENT_TIMESTAMP,
-  created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  modified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+  created timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  modified timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- --------------------------------------------------------
