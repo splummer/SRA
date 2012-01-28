@@ -50,6 +50,8 @@ class User_profile extends CI_Controller {
 		$this->form_validation->set_rules('address_2', 'Address Line 2', 'trim');
 		$this->form_validation->set_rules('city', 'City', 'trim');
 		$this->form_validation->set_rules('state', 'State', 'trim');
+		$this->form_validation->set_rules('zip', 'Zip Code', 'trim|numeric|exact_length[5]');
+		$this->form_validation->set_rules('country', 'Country', 'trim');
 		
 		if( ! $this->form_validation->run())
 		{
@@ -67,7 +69,10 @@ class User_profile extends CI_Controller {
 				'nickname' => $this->input->post('nickname'),
 				'address_1' => $this->input->post('address_1'),
 				'address_2' => $this->input->post('address_2'),
+				'city' => $this->input->post('city'),
 				'state' => $this->input->post('state'),
+				'zip' => $this->input->post('zip'),
+				'country' => $this->input->post('country'),
 			);
 			$this->user_profile_model->update_user_profile($this->tank_auth->get_user_id(), $data['profile_info']);
 			redirect('user_profile');
