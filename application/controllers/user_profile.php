@@ -36,28 +36,31 @@ class User_profile extends CI_Controller {
 		// Display the profile information for the currently logged in user.
 		$data['user_profile'] = $this->user_profile_model->get_user_profile($this->tank_auth->get_user_id());
 
-		$data['main_view'] = 'profile/user_profile';
+		$data['main_view'] = 'profile/user_home';
 		$data['title'] = 'User Profile For';
 		$this->load->view('includes/template', $data);
 	}
 	
 	function update($user_id = '')
 	{
-		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-		$this->form_validation->set_rules('nickname', 'Nickname', 'trim');
-		$this->form_validation->set_rules('address_1', 'Address Line 1', 'trim');
-		$this->form_validation->set_rules('address_2', 'Address Line 2', 'trim');
-		$this->form_validation->set_rules('city', 'City', 'trim');
-		$this->form_validation->set_rules('state', 'State', 'trim');
+		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[25]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[25]');
+		$this->form_validation->set_rules('nickname', 'Nickname', 'trim|max_length[25]');
+		$this->form_validation->set_rules('address_1', 'Address Line 1', 'trim|max_length[40]');
+		$this->form_validation->set_rules('address_2', 'Address Line 2', 'trim|max_length[40]');
+		$this->form_validation->set_rules('city', 'City', 'trim|max_length[30]');
+		$this->form_validation->set_rules('state', 'State', 'trim|max_length[2]');
 		$this->form_validation->set_rules('zip', 'Zip Code', 'trim|numeric|exact_length[5]');
-		$this->form_validation->set_rules('country', 'Country', 'trim');
+		$this->form_validation->set_rules('country', 'Country', 'trim|max_length[2]');
+		$this->form_validation->set_rules('phone', 'Phone Number', 'trim|max_length[12]');
+		$this->form_validation->set_rules('twitter', 'Twitter Username', 'trim|max_length[20]');
 		
+				
 		if( ! $this->form_validation->run())
 		{
 			$data['user_profile'] = $this->user_profile_model->get_user_profile($this->tank_auth->get_user_id());
 	
-			$data['main_view'] = 'profile/edit';
+			$data['main_view'] = 'profile/edit_profile';
 			$data['title'] = 'Edit User Profile';
 			$this->load->view('includes/template', $data);
 		}
@@ -73,6 +76,7 @@ class User_profile extends CI_Controller {
 				'state' => $this->input->post('state'),
 				'zip' => $this->input->post('zip'),
 				'country' => $this->input->post('country'),
+				'phone' => $this->input->post('phone'),
 			);
 			$this->user_profile_model->update_user_profile($this->tank_auth->get_user_id(), $data['profile_info']);
 			redirect('user_profile');

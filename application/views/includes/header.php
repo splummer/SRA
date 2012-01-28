@@ -39,7 +39,7 @@
             <li><a href="#contact">Contact</a></li>
           </ul>
           <p class="pull-right">
-          <?php echo ( $this->tank_auth->is_logged_in() ) ? 'Logged in as <a href="#">' . $this->session->userdata('username') . '</a>' : anchor('auth/login', 'Login') ; ?>
+          <?php echo ( $this->tank_auth->is_logged_in() ) ? 'Logged in as' . anchor('user_profile', $this->session->userdata('username')) . ' | ' . anchor('/auth/logout/', 'Logout') : anchor('auth/login', 'Login') ; ?>
           </p>
         </div>
       </div>

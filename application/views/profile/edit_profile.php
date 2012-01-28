@@ -1,3 +1,4 @@
+<?php $this->load->view('includes/user_profile_pills'); ?>
 <?php
 $first_name = array (
 	'name'		=>	'first_name',
@@ -56,6 +57,22 @@ $zip = array (
 	'class'		=>	'span2',
 	'placeholder' =>	'Zip Code'
 );
+$phone = array (
+	'name'		=>	'phone',
+	'id'		=>	'phone',
+	'value' 	=>	set_value('phone', $user_profile['phone']),
+	'maxlength'	=>	'12',
+	'class'		=>	'span4',
+	'placeholder' =>	'Phone Number'
+);
+$twitter = array (
+	'name'		=>	'twitter',
+	'id'		=>	'twitter',
+	'value' 	=>	set_value('twitter', $user_profile['twitter']),
+	'maxlength'	=>	'20',
+	'class'		=>	'span4',
+	'placeholder' =>	'Twitter Username'
+);
 
 
 ?>
@@ -63,6 +80,7 @@ $zip = array (
 
 <!-- TODO replace this line with inline errors and color code form elements when errored 
 	TODO probably should be a two column form with stacked labels perhaps -->
+
 <?php echo validation_errors(); ?>
 
 <?php echo form_open($this->uri->uri_string()); ?>
@@ -101,6 +119,18 @@ $zip = array (
 	<?php echo form_label('Country', 'country'); ?>
 	<div class=input>
 		<?php echo country_dropdown('country', '', set_value('country', $user_profile['country'])); ?>
+	</div>
+</div> <!-- close clearfix -->
+<div class=clearfix>
+	<?php echo form_label('Phone Number', $phone['id']); ?>
+	<div class=input>
+		<?php echo form_input($phone) ?>
+	</div>
+</div> <!-- close clearfix -->
+<div class=clearfix>
+	<?php echo form_label('Twitter Username', $twitter['id']); ?>
+	<div class=input>
+		<?php echo form_input($twitter) ?>
 	</div>
 </div> <!-- close clearfix -->
 
