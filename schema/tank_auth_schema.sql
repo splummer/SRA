@@ -50,9 +50,8 @@ CREATE TABLE user_autologin (
 CREATE TABLE user_profiles (
 	id serial PRIMARY KEY,
 	user_id integer NOT NULL,
-	last_name character varying(25) NOT NULL,
-	first_name character varying(25) NOT NULL,
-	email character varying(35) NOT NULL,
+	last_name character varying(25),
+	first_name character varying(25),
 	nickname character varying(25),
 	address_1 character varying(40),
 	address_2 character varying(40),
@@ -61,12 +60,12 @@ CREATE TABLE user_profiles (
 	zip character varying(10),
 	country character varying(35),
 	phone character varying(12),
-	website varchar(255)  DEFAULT NULL
+	website varchar(255) DEFAULT NULL,
 	twitter varchar(30),
 	over13 boolean DEFAULT true NOT NULL,
 	contact_attend boolean DEFAULT true NOT NULL,
 	contact_any boolean DEFAULT false NOT NULL,
-	contact_external boolean DEFAULT false NOT NULL,
+	contact_external boolean DEFAULT false NOT NULL
 );
 
 -- --------------------------------------------------------
@@ -88,7 +87,7 @@ CREATE TABLE users (
   new_email varchar(100)  DEFAULT NULL,
   new_email_key varchar(50)  DEFAULT NULL,
   last_ip inet  NOT NULL,
-  last_login timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
+  last_login timestamp with time zone,
   created timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
   modified timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
