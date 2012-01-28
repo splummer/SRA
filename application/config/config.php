@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://10.0.1.9/~plummer/sra/';
+$config['base_url']	= 'http://ilmyryn.dyndns.org/~plummer/sra/';
 
 /*
 |--------------------------------------------------------------------------
