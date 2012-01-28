@@ -55,7 +55,7 @@ class User_profile_model extends CI_Model
 	function update_user_profile($user_id, $profile_info)
 	{
 		$this->db->where('user_id', $user_id);
-		$this->db->update($this->profile_table_name, profile_info);
+		$this->db->update($this->profile_table_name, $profile_info);
 
 		return $this->db->affected_rows() > 0;
 	}
