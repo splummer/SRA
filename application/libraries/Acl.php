@@ -74,7 +74,7 @@ class Acl extends Zend_Acl
 				$this->acl->allow($perms->role, $perms->resource, 'delete') : 
 				$this->acl->deny($perms->role, $perms->resource, 'delete');
 		}
-		$this->acl->allow('6'); //Change this to whatever id your adminstrators group is
+		$this->acl->allow('1'); //Change this to whatever id your adminstrators group is
 	}
 	/*
 	 * Methods to query the ACL.

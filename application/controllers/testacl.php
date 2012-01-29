@@ -6,8 +6,8 @@ class Testacl extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('acl');
-		define('ROLE', '6');
-		define('RESOURCE', '1');
+		define('ROLE', '7');
+		define('RESOURCE', '3');
  	}
 
  function index() {

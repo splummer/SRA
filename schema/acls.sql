@@ -35,20 +35,30 @@ CREATE TABLE user_role_lookup (
 );
 
 INSERT INTO acl_resources (id, name, description, parentId) VALUES
-(1, 'testacl', 'Acl Test Controller', NULL);
- 
+(1, 'testacl', 'Acl Test Controller', NULL),
+(2, 'Org_Test', 'Test Organization', NULL),
+(3, 'Event_Test_Gaming_Convetion', 'Test Gaming Convention', 2);
+
 INSERT INTO acl_roles (id, name, description, parentId) VALUES
-(1, 'SRA_Guest', 'Not logged in user', NULL),
-(2, 'SRA_User', 'Normal user with an account', 1),
-(3, 'SRA_Register', 'Can register people for site or any event session on site', 2),
-(4, 'SRA_Editor', 'Can edit and manage events site wide', 2),
-(5, 'SRA_Admin', 'Can administer all things', 4),
-(6, 'Super_Admin', 'Has rights to everything', NULL);
+(1, 'Super_Admin', 'Has rights to everything', NULL),
+(2, 'SRA_Guest', 'Not logged in user', NULL),
+(3, 'SRA_User', 'Normal user with an account', 2),
+(4, 'SRA_Register', 'Can register people for site or any event session on site', 3),
+(5, 'SRA_Editor', 'Can edit and manage events site wide', 3),
+(6, 'SRA_Admin', 'Can administer all things', 3),
+(7, 'Org_Test_Admin', 'Can administer Test Org Things', 3),
+(8, 'Org_Editor', 'Can Editing type things for an Org', 3),
+(9, 'Event_Test_Gaming_Convention_Admin', 'Can administer all event things', 3);
  
 INSERT INTO acl_permissions (role ,resource ,read ,write ,modify ,delete ,publish)
 VALUES 
-('1', '1', '1', '0', '0', '0', '0'),
-('2', '1', '1', '1', '0', '0', '0'),
-('3', '1', '1', '1', '0', '1', '0'),
-('4', '1', '1', '1', '1', '1', '0'),
-('5', '1', '1', '1', '1', '1', '1');
+('2', '1', '1', '0', '0', '0', '0'),
+('3', '1', '1', '1', '0', '0', '0'),
+('4', '1', '1', '1', '0', '1', '0'),
+('5', '1', '1', '1', '1', '1', '0'),
+('6', '1', '1', '1', '1', '1', '1'),
+('2', '2', '1', '0', '0', '0', '0');
+('7', '2', '1', '1', '1', '1', '1'),
+('8', '2', '1', '1', '1', '0', '0'),
+('9', '3', '1', '1', '1', '1', '1');
+
