@@ -1,1 +1,16 @@
 SRA - Squirrel Registration Authority
+
+
+This convention management registration system is born out of the old GAGG registrations system. It adds functionality to create and manage conventions.
+
+To install it you will need a few things:
+
+Postgres
+Apache
+PHP
+Codeigniter System folder
+
+It includes a .htaccess to remove the codeigniter index.php from URLs which could cause it to blow up on your system if you don't have rights to use .htaccess.
+
+
+
