@@ -80,6 +80,7 @@ CREATE TABLE event_resources (
     resource_name character varying(155) NOT NULL
 );
 
+-- This whole permissions section is not needed due to ZendACL tables in separate acl.sql
 CREATE TABLE role (
     role_id SERIAL PRIMARY KEY NOT NULL,
     role_name character varying(100) NOT NULL,
@@ -104,7 +105,7 @@ CREATE TABLE uco_role_lookup (
     fk_org_id integer,
     fk_role_id integer NOT NULL
 );
-
+-- Not needed section.
 
 COMMENT ON COLUMN convention.con_name IS 'Convention name in long form';
 
