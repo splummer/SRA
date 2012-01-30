@@ -18,7 +18,7 @@ class Testacl extends CI_Controller
 		}
 			echo "You have permission to read this resource!";
 	}
-	function write() {
+	function create() {
 		if (!$this->zacl->can_write(RESOURCE, ROLE)) {
 			die("You do not have permissions to write to this resource");
 		}

@@ -19,7 +19,7 @@ CREATE TABLE acl_permissions (
 	role INT,
 	resource INT,
 	read BOOLEAN DEFAULT FALSE,
-	write BOOLEAN DEFAULT FALSE,
+	create BOOLEAN DEFAULT FALSE,
 	modify BOOLEAN DEFAULT FALSE,
 	delete BOOLEAN DEFAULT FALSE,
 	publish BOOLEAN DEFAULT FALSE,
@@ -50,7 +50,7 @@ INSERT INTO acl_roles (id, name, description, parentId) VALUES
 (8, 'Org_Editor', 'Can Editing type things for an Org', 3),
 (9, 'Event_Test_Gaming_Convention_Admin', 'Can administer all event things', 3);
  
-INSERT INTO acl_permissions (role ,resource ,read ,write ,modify ,delete ,publish)
+INSERT INTO acl_permissions (role ,resource ,read ,create ,modify ,delete ,publish)
 VALUES 
 ('2', '1', '1', '0', '0', '0', '0'),
 ('3', '1', '1', '1', '0', '0', '0'),

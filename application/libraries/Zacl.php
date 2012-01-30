@@ -64,9 +64,9 @@ class Zacl extends Zend_Acl
 			$perms->read == 't' ? 
 				$this->acl->allow($perms->role, $perms->resource, 'read') : 
 				$this->acl->deny($perms->role, $perms->resource, 'read');
-			$perms->write == 't' ? 
-				$this->acl->allow($perms->role, $perms->resource, 'write') : 
-				$this->acl->deny($perms->role, $perms->resource, 'write');
+			$perms->create == 't' ? 
+				$this->acl->allow($perms->role, $perms->resource, 'create') : 
+				$this->acl->deny($perms->role, $perms->resource, 'create');
 			$perms->modify == 't' ? 
 				$this->acl->allow($perms->role, $perms->resource, 'modify') : 
 				$this->acl->deny($perms->role, $perms->resource, 'modify');
@@ -122,7 +122,7 @@ class Zacl extends Zend_Acl
 		return $this->acl->isAllowed($role, $resource, 'read')? TRUE : FALSE;
 	}
 	function can_write($resource, $role) {
-		return $this->acl->isAllowed($role, $resource, 'write')? TRUE : FALSE;
+		return $this->acl->isAllowed($role, $resource, 'create')? TRUE : FALSE;
 	}
 	function can_modify($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'modify')? TRUE : FALSE;
