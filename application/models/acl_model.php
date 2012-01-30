@@ -85,11 +85,10 @@ class Acl_model extends CI_Model
 	 * delete_all_user_roles Name - Delete all roles for given user_id
 	 * 
 	 * @param	 - int
-	 * @param	 - int
 	 * @return	 - object
 	 * 
 	 */
-	function delete_all_user_roles($user_id, $role_id)
+	function delete_all_user_roles($user_id)
 	{
 		$this->db->where('fk_user_id', $user_id);
 		return $this->db->delete($this->user_role_lookup_table);
