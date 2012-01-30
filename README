@@ -3,7 +3,7 @@ SRA - Squirrel Registration Authority
 
 This convention management registration system is born out of the old GAGG registrations system. It adds functionality to create and manage conventions.
 
-Ideally it will be a system provided hosted convention management for many different gaming conventions and events. It also could be extended to offer community features.
+Ideally it will be a system provided hosted convention management for many different gaming conventions and events. It also could be extended to offer community features such as comments etc.
 
 To install it you will need a few things:
 
@@ -44,6 +44,7 @@ Basic Functionality:
   - Actions will be logged such as session/event/org modifications.
   - RSS feed of events for the convention
   - Rewards system to allow for free badges for running X number of events.
+  - Exporting of an event's sessions for making of print materials.
 
 ===============
 Features it would be nice to have in the future
