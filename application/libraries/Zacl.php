@@ -2,7 +2,7 @@
 
 require_once BASEPATH.'libraries/Zend/Acl.php';
 
-class Acl extends Zend_Acl 
+class Zacl extends Zend_Acl 
 {
 	function __construct() 
 	{
@@ -76,6 +76,31 @@ class Acl extends Zend_Acl
 		}
 		$this->acl->allow('1'); //Change this to whatever id your adminstrators group is
 	}
+
+	/**
+	 * get_user_roles- get all of a given users roles, takes user_id and returns
+	 * array of all the users roles
+	 * 
+	 * @param	- int
+	 * @return	- array
+	 * 
+	 */
+	function get_user_roles($user_id)
+	{
+		// if these are not set the user is not logged in return the guest role and quit
+		if ( !is_logged_in() )
+		{
+			$user_roles = array ( 'fk_acl_roles_id' => '2');
+			return $user_roles;
+		}
+		
+		{
+			$result = $query->result_array();
+			return $result;
+		}
+			
+	}
+
 	/*
 	 * Methods to query the ACL.
 	 */
