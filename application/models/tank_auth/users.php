@@ -20,6 +20,7 @@ class Users extends CI_Model
 		parent::__construct();
 
 		$ci =& get_instance();
+		$this->load->model('acl_model');
 		$this->table_name			= $ci->config->item('db_table_prefix', 'tank_auth').$this->table_name;
 		$this->profile_table_name	= $ci->config->item('db_table_prefix', 'tank_auth').$this->profile_table_name;
 	}
@@ -133,6 +134,8 @@ class Users extends CI_Model
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();
 			if ($activated)	$this->create_profile($user_id);
+			// set the user role to be a site wide user
+			if ($activated) $this->acl_model->add_user_role($user_id, '3');
 			return array('user_id' => $user_id);
 		}
 		return NULL;
@@ -167,6 +170,9 @@ class Users extends CI_Model
 			$this->db->update($this->table_name);
 
 			$this->create_profile($user_id);
+			// set the user role to be a site wide user
+			$this->acl_model->add_user_role($user_id, '3');
+
 			return TRUE;
 		}
 		return FALSE;
