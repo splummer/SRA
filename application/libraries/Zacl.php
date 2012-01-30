@@ -4,15 +4,18 @@ require_once BASEPATH.'libraries/Zend/Acl.php';
 
 class Zacl extends Zend_Acl 
 {
+
 	function __construct() 
 	{
-		$CI = &get_instance();
+		$this->ci =& get_instance();
+		
+		$this->ci->load->model('acl_model');
 		$this->acl = new Zend_Acl();
  		
  		// The following section accounts for PG's different sort order from MYSQL
  		// If I can figure out how to pass ASC NULLS FIRST to PG with CI then I can avoid this.
- 		$CI->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
-		$query = $CI->db->get('acl_roles');
+ 		$this->ci->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
+		$query = $this->ci->db->get('acl_roles');
 		$roles = $query->result();
 		foreach ($roles as $roles) { //Add the roles to the ACL
 			$role = new Zend_Acl_Role($roles->id); 
@@ -21,8 +24,8 @@ class Zacl extends Zend_Acl
 
  		// The following section accounts for PG's different sort order from MYSQL
  		// If I can figure out how to pass ASC NULLS FIRST to PG with CI then I can avoid this.
- 		$CI->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
-		$query = $CI->db->get('acl_resources');
+ 		$this->ci->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
+		$query = $this->ci->db->get('acl_resources');
 		$resources = $query->result();
 		foreach ($resources as $resources) { //Add the roles to the ACL
 			$resource = new Zend_Acl_Resource($resources->id); 
@@ -30,17 +33,17 @@ class Zacl extends Zend_Acl
 		}
 
 
- 		$CI->db->where('parentid IS NOT NULL', null, false); // We already added NULLS above
-		$CI->db->order_by('parentid', 'ASC'); //Get the roles
-		$query = $CI->db->get('acl_roles');
+ 		$this->ci->db->where('parentid IS NOT NULL', null, false); // We already added NULLS above
+		$this->ci->db->order_by('parentid', 'ASC'); //Get the roles
+		$query = $this->ci->db->get('acl_roles');
 		$roles = $query->result();
 
- 		$CI->db->where('parentid IS NOT NULL', null, false); // We already added NULLS above
-		$CI->db->order_by('parentid', 'ASC'); //Get the resources
-		$query = $CI->db->get('acl_resources');
+ 		$this->ci->db->where('parentid IS NOT NULL', null, false); // We already added NULLS above
+		$this->ci->db->order_by('parentid', 'ASC'); //Get the resources
+		$query = $this->ci->db->get('acl_resources');
 		$resources = $query->result();
 
-		$query = $CI->db->get('acl_permissions'); //Get the permissions
+		$query = $this->ci->db->get('acl_permissions'); //Get the permissions
 		$permissions = $query->result();
 
 		foreach ($roles as $roles) { //Add the roles to the ACL
@@ -78,46 +81,56 @@ class Zacl extends Zend_Acl
 	}
 
 	/**
-	 * get_user_roles- get all of a given users roles, takes user_id and returns
-	 * array of all the users roles
+	 * check_acl - check's the acl for a given resource and action, role is optional
+	 * will check all roles of a given user and return true if any of them are true.
 	 * 
 	 * @param	- int
-	 * @return	- array
+	 * @param	- string
+	 * @param	- object
+	 * @return	- boolean
 	 * 
 	 */
-	function get_user_roles($user_id)
+	function check_acl($resource, $action, $roles = '')
 	{
-		// if these are not set the user is not logged in return the guest role and quit
-		if ( !is_logged_in() )
-		{
-			$user_roles = array ( 'fk_acl_roles_id' => '2');
-			return $user_roles;
+		if (!$this->acl->has($resource))
+        {
+			return 1;
+        }
+        if (empty($roles)) {
+        	if (isset($this->ci->session->userdata['user_id'])) {
+				$roles = $this->ci->acl_model->get_user_roles($this->ci->session->userdata['user_id']);
+			}
 		}
-		
-		{
-			$result = $query->result_array();
-			return $result;
+		if (empty($roles)) {
+			return FALSE;
 		}
-			
+		foreach ($roles as $roles)
+		{
+        	if ($this->acl->isAllowed($roles->fk_acl_roles_id, $resource, $action))
+        	{
+				return TRUE;
+			}
+		}
+		return FALSE;
 	}
 
 	/*
-	 * Methods to query the ACL.
+	 * Methods to query the ACL. These need work I think
 	 */
  
-	function can_read($role, $resource) {
+	function can_read($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'read')? TRUE : FALSE;
 	}
-	function can_write($role, $resource) {
+	function can_write($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'write')? TRUE : FALSE;
 	}
-	function can_modify($role, $resource) {
+	function can_modify($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'modify')? TRUE : FALSE;
 	}
-	function can_delete($role, $resource) {
+	function can_delete($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'delete')? TRUE : FALSE;
 	}
-    function can_publish($role, $resource) {
+    function can_publish($resource, $role) {
 		return $this->acl->isAllowed($role, $resource, 'publish')? TRUE : FALSE;
 	}
 }
