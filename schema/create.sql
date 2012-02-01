@@ -1,5 +1,6 @@
 ﻿CREATE TABLE organization (
     org_id SERIAL PRIMARY KEY NOT NULL,
+	fk_acl_resources_id INTEGER ,
     org_name character varying(20) NOT NULL,
     location character varying(30),
     fk_user_id integer NOT NULL,
@@ -8,6 +9,7 @@
 
 CREATE TABLE event (
     event_id SERIAL PRIMARY KEY NOT NULL,
+	fk_acl_resources_id INTEGER ,
     event_name character varying(40) NOT NULL,
     event_short_name character varying(40) NOT NULL,
     start_time timestamp with time zone,
@@ -28,6 +30,7 @@ CREATE TABLE event_timeslot (
 CREATE TABLE session (
     session_id SERIAL PRIMARY KEY NOT NULL,
     fk_user_id integer NOT NULL,
+	fk_acl_resources_id INTEGER ,
     session_title character varying(255) NOT NULL,
     description text,
     min_attendees integer,
