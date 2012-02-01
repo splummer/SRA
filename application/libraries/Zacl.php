@@ -14,6 +14,7 @@ class Zacl extends Zend_Acl
  		
  		// The following section accounts for PG's different sort order from MYSQL
  		// If I can figure out how to pass ASC NULLS FIRST to PG with CI then I can avoid this.
+ 		// If we were to load NULL parentid entries last then inheritance falls apart.
  		$this->ci->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
 		$query = $this->ci->db->get('acl_roles');
 		$roles = $query->result();
@@ -24,6 +25,7 @@ class Zacl extends Zend_Acl
 
  		// The following section accounts for PG's different sort order from MYSQL
  		// If I can figure out how to pass ASC NULLS FIRST to PG with CI then I can avoid this.
+ 		// If we were to load NULL parentid entries last then inheritance falls apart.
  		$this->ci->db->where('parentid IS NULL', null, false); //hack for PG sorting NULLS last
 		$query = $this->ci->db->get('acl_resources');
 		$resources = $query->result();
@@ -92,18 +94,23 @@ class Zacl extends Zend_Acl
 	 */
 	function check_acl($resource, $action, $roles = '')
 	{
+		// if the resource is not found in the ACL then return 1
 		if (!$this->acl->has($resource))
         {
 			return 1;
         }
+    	// if we were not passed a role lookup the current user's role(s)
         if (empty($roles)) {
         	if (isset($this->ci->session->userdata['user_id'])) {
 				$roles = $this->ci->acl_model->get_user_roles($this->ci->session->userdata['user_id']);
 			}
 		}
+		// If we can still not find any roles then return FALSE they are likely not logged in.
 		if (empty($roles)) {
 			return FALSE;
 		}
+		// do an isAllowed for each role of a user until one returns true. 
+		// If none do then return false.
 		foreach ($roles as $roles)
 		{
         	if ($this->acl->isAllowed($roles->fk_acl_roles_id, $resource, $action))
@@ -115,7 +122,8 @@ class Zacl extends Zend_Acl
 	}
 
 	/*
-	 * Methods to query the ACL. These need work I think
+	 * Methods to query the ACL. These need work I think, for one they do not check all
+	 * all of a user's roles.
 	 */
  
 	function can_read($resource, $role) {
