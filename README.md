@@ -12,21 +12,21 @@ Download codeigniter (CodeIgniter_2.1.0 currently) zip, just google it.
 Unzip codeigniter somewhere, and steal the contents of the /system/ folder within it. Copy everything in /system/*, and paste those folders into SRA's /system/ folder to form the running core of codeigniter for SRA. (Only the /system/libraries/Zend folder need be retained)
 
 Create Database:
-  * createdb sra;
-  * createlang plpgsql sra;
-  * psql sra < schema/tank_auth_schema.sql
-  * psql sra < schema/acls.sql
-  * psql sra < schema/create.sql Contents of these tables is not used yet and very much in flux.
+* createdb sra;
+* createlang plpgsql sra;
+* psql sra < schema/tank_auth_schema.sql
+* psql sra < schema/acls.sql
+* psql sra < schema/create.sql Contents of these tables is not used yet and very much in flux.
 
 optionally: create a dummy, insecure dev user for non-public development environments so that dummy password can be the one used in applications/config/database.php:  
 createuser -P -d -a -e dev
 
 
 Modify configs files:
-  * ln -s gitignore.dist .gitignore (or copy gitignore.dist to gitignore)
-  * cp htaccess.dist .htaccess
-  * cp application/config/config.php.dist application/config/config.php
-  * cp application/config/database.php.dist application/config/database.php
+* ln -s gitignore.dist .gitignore (or copy gitignore.dist to gitignore)
+* cp htaccess.dist .htaccess
+* cp application/config/config.php.dist application/config/config.php
+* cp application/config/database.php.dist application/config/database.php
 
 edit htaccess with your proper root url path  
 edit database settings in application/database.php to replace them with your own local settings  
