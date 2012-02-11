@@ -1,5 +1,6 @@
+
 ﻿CREATE TABLE organization (
-    org_id SERIAL PRIMARY KEY NOT NULL,
+    org_id SERIAL,
 	fk_acl_resources_id INTEGER ,
     org_name character varying(20) NOT NULL,
     location character varying(30),
@@ -8,7 +9,7 @@
 );
 
 CREATE TABLE event (
-    event_id SERIAL PRIMARY KEY NOT NULL,
+    event_id SERIAL NOT NULL,
 	fk_acl_resources_id INTEGER ,
     event_name character varying(40) NOT NULL,
     event_short_name character varying(40) NOT NULL,
@@ -16,7 +17,7 @@ CREATE TABLE event (
     end_time timestamp with time zone,
     session_submission boolean DEFAULT false NOT NULL,
     pre_reg boolean DEFAULT false NOT NULL,
-    onsite_reg boolean DEFAULT false NOT NULL,
+    onsite_reg boolean DEFAULT false NOT NULL
 );
 
 CREATE TABLE event_timeslot (
@@ -46,58 +47,59 @@ CREATE TABLE session (
     modified timestamp with time zone,
     maturity character(1),
     event_type character varying(25),
-    approved boolean DEFAULT false, //should be an event specific flag
+    approved boolean DEFAULT false, 
     show_change boolean DEFAULT false,
-    featured boolean DEFAULT false, // should be an event specific flag
+    featured boolean DEFAULT false,
     display_org boolean DEFAULT false
 );
+COMMENT ON COLUMN session.approved IS 'Approved and featured fields should be an event specific flag';
 
-CREATE session_change_log {
-	session_change_log_id SERIAL PRIMARY KEY NOT NULL,
+CREATE session_change_log (
+	session_change_log_id SERIAL,
 	fk_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL,
     change_description text,
-	created timestamp with time zone DEFAULT now(),	
-};
+	created timestamp with time zone DEFAULT now()
+);
 
 CREATE TABLE event_session (
-	event_session_id SERIAL PRIMARY KEY NOT NULL,
+	event_session_id SERIAL,
 	fk_event_id integer NOT NULL,
 	fk_session_id integer NOT NULL,
 	fk_resource_id integer NOT NULL,
 	fk_timeslot_id integer,
 	start_time timestamp with time zone NOT NULL,
 	end_time timestamp with time zone NOT NULL,
-    cancelled boolean DEFAULT false,
+    cancelled boolean DEFAULT false
 );
 
 CREATE TABLE gm (
-	gm_id SERIAL integer PRIMARY KEY NOT NULL,
+	gm_id SERIAL,
 	event_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL
 );
 
 CREATE TABLE event_resources (
-	resource_id SERIAL PRIMARY KEY NOT NULL,
+	resource_id SERIAL,
 	resource_type character varying (45) NOT NULL,
     resource_name character varying(155) NOT NULL
 );
 
 -- This whole permissions section is not needed due to ZendACL tables in separate acl.sql
 CREATE TABLE role (
-    role_id SERIAL PRIMARY KEY NOT NULL,
+    role_id SERIAL,
     role_name character varying(100) NOT NULL,
     Description character varying (255)
 );
 
 CREATE TABLE permission (
-    perm_id SERIAL PRIMARY KEY NOT NULL,
+    perm_id SERIAL,
     perm_name character varying(15) NOT NULL,
     description character varying (255)
 );
 
 CREATE TABLE rp_lookup (
-	rp_lookup_id SERIAL integer NOT NULL,
+	rp_lookup_id SERIAL NOT NULL,
     fk_role_id integer NOT NULL,
     fk_perm_id integer NOT NULL
 );
