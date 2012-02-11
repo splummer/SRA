@@ -19,13 +19,14 @@ CREATE TABLE acl_permissions (
 	role INT,
 	resource INT,
 	read BOOLEAN DEFAULT FALSE,
-	create BOOLEAN DEFAULT FALSE,
+	create_stuff BOOLEAN DEFAULT FALSE,
 	modify BOOLEAN DEFAULT FALSE,
 	delete BOOLEAN DEFAULT FALSE,
 	publish BOOLEAN DEFAULT FALSE,
 	description VARCHAR(255),
 	PRIMARY KEY (id)
 );
+-- Possibly the column above should not use create as its name because it seems to be a special keyword in postgres.
 
 CREATE TABLE user_role_lookup (
 	id SERIAL NOT NULL,
@@ -50,14 +51,15 @@ INSERT INTO acl_roles (id, name, description, parentId) VALUES
 (8, 'Org_Editor', 'Can Editing type things for an Org', 3),
 (9, 'Event_Test_Gaming_Convention_Admin', 'Can administer all event things', 3);
  
-INSERT INTO acl_permissions (role ,resource ,read ,create ,modify ,delete ,publish)
+-- Again perhaps this column should not be named create due to it's special keyword status.
+INSERT INTO acl_permissions (role ,resource ,read ,create_stuff ,modify ,delete ,publish)
 VALUES 
 ('2', '1', '1', '0', '0', '0', '0'),
 ('3', '1', '1', '1', '0', '0', '0'),
 ('4', '1', '1', '1', '0', '1', '0'),
 ('5', '1', '1', '1', '1', '1', '0'),
 ('6', '1', '1', '1', '1', '1', '1'),
-('2', '2', '1', '0', '0', '0', '0');
+('2', '2', '1', '0', '0', '0', '0'),
 ('7', '2', '1', '1', '1', '1', '1'),
 ('8', '2', '1', '1', '1', '0', '0'),
 ('9', '3', '1', '1', '1', '1', '1');

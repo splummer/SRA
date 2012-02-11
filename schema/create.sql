@@ -1,5 +1,5 @@
 
-﻿CREATE TABLE organization (
+CREATE TABLE organization (
     org_id SERIAL,
 	fk_acl_resources_id INTEGER ,
     org_name character varying(20) NOT NULL,
@@ -52,15 +52,6 @@ CREATE TABLE session (
     featured boolean DEFAULT false,
     display_org boolean DEFAULT false
 );
-COMMENT ON COLUMN session.approved IS 'Approved and featured fields should be an event specific flag';
-
-CREATE session_change_log (
-	session_change_log_id SERIAL,
-	fk_session_id integer NOT NULL,
-	fk_user_id integer NOT NULL,
-    change_description text,
-	created timestamp with time zone DEFAULT now()
-);
 
 CREATE TABLE event_session (
 	event_session_id SERIAL,
@@ -71,6 +62,14 @@ CREATE TABLE event_session (
 	start_time timestamp with time zone NOT NULL,
 	end_time timestamp with time zone NOT NULL,
     cancelled boolean DEFAULT false
+);
+
+CREATE session_change_log (
+	session_change_log_id SERIAL,
+	fk_session_id integer NOT NULL,
+	fk_user_id integer NOT NULL,
+    change_description text,
+	created timestamp with time zone DEFAULT now()
 );
 
 CREATE TABLE gm (
@@ -110,6 +109,9 @@ CREATE TABLE uco_role_lookup (
     fk_org_id integer,
     fk_role_id integer NOT NULL
 );
+
+COMMENT ON COLUMN session.approved IS 'Approved and featured fields should be an event specific flag';
+
 -- Not needed section.
 
 COMMENT ON COLUMN convention.con_name IS 'Convention name in long form';
