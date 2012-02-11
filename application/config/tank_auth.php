@@ -19,7 +19,7 @@ $config['webmaster_email'] = 'webmaster@runninggagg.org';
 | 'phpass_hash_strength' = Password hash strength.
 |--------------------------------------------------------------------------
 */
-$config['phpass_hash_portable'] = TRUE;
+$config['phpass_hash_portable'] = FALSE;
 $config['phpass_hash_strength'] = 8;
 
 /*
