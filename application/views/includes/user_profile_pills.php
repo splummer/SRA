@@ -1,6 +1,6 @@
 <!-- TODO Would be cool to have messages dynamically displayed here -->
 
-<ul class="pills">
+<ul class="nav nav-tabs">
 	<?php echo ( uri_string() == 'user_profile' ) ? '<li class="active">' : '<li>' ; ?>
 		<?php echo anchor('user_profile', 'Home') ; ?>
 	</li>

@@ -62,7 +62,7 @@ $phone = array (
 	'id'		=>	'phone',
 	'value' 	=>	set_value('phone', $user_profile['phone']),
 	'maxlength'	=>	'12',
-	'class'		=>	'span4',
+	'class'		=>	'span2',
 	'placeholder' =>	'Phone Number'
 );
 $twitter = array (
@@ -70,10 +70,12 @@ $twitter = array (
 	'id'		=>	'twitter',
 	'value' 	=>	set_value('twitter', $user_profile['twitter']),
 	'maxlength'	=>	'20',
-	'class'		=>	'span4',
+	'class'		=>	'span2',
 	'placeholder' =>	'Twitter Username'
 );
-
+$form_label_param = array(
+	'class'	=>	'control-label'
+);
 
 ?>
 
@@ -85,26 +87,26 @@ $twitter = array (
 
 <?php echo form_open($this->uri->uri_string()); ?>
 
-<div class=clearfix>
-	<?php echo form_label('First Name', $first_name['id']); ?>
+<div class=control-group>
+	<?php echo form_label('First Name', $first_name['id'], $form_label_param); ?>
 	<div class=input>
 		<?php echo form_input($first_name) ?>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Last Name', $last_name['id']); ?>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Last Name', $last_name['id'], $form_label_param); ?>
 	<div class=input>
 		<?php echo form_input($last_name) ?>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Nickname', $nickname['id']); ?>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Nickname', $nickname['id'], $form_label_param); ?>
 	<div class=input>
 		<?php echo form_input($nickname) ?>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Address', $address_1['id']); ?>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Address', $address_1['id'], $form_label_param); ?>
 	<div class=input>
 		<?php echo form_input($address_1) ?> <br />
 		<?php echo form_input($address_2) ?> <br />
@@ -114,29 +116,30 @@ $twitter = array (
 			<?php echo form_input($zip) ?>
 		</div>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Country', 'country'); ?>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Country', 'country', $form_label_param); ?>
 	<div class=input>
 		<?php echo country_dropdown('country', '', set_value('country', $user_profile['country'])); ?>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Phone Number', $phone['id']); ?>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Phone Number', $phone['id'], $form_label_param); ?>
 	<div class=input>
 		<?php echo form_input($phone) ?>
 	</div>
-</div> <!-- close clearfix -->
-<div class=clearfix>
-	<?php echo form_label('Twitter Username', $twitter['id']); ?>
-	<div class=input>
+</div> <!-- close control-group -->
+<div class=control-group>
+	<?php echo form_label('Twitter Username', $twitter['id'], $form_label_param); ?>
+	<div class=input-prepend>
+		<span class="add-on">@</span>
 		<?php echo form_input($twitter) ?>
 	</div>
-</div> <!-- close clearfix -->
+</div> <!-- close control-group -->
 
-<div class="clearfix">
+<div class="control-group">
 	<div class="actions">
-		<?php echo form_submit('submit', 'Update Profile', 'class="btn primary"'); ?>
+		<?php echo form_submit('submit', 'Update Profile', 'class="btn-primary"'); ?>
 	</div>
-</div><!-- /clearfix -->
+</div><!-- /control-group -->
 <?php echo form_close(); ?>
