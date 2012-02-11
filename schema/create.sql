@@ -1,3 +1,7 @@
+-- This is incomplete sql file very much in development. 
+-- Most of the objects in it have not even been implemented yet.
+-- This is more of a guideline of what we may want to store.
+
 
 CREATE TABLE organization (
     org_id SERIAL,
@@ -64,7 +68,7 @@ CREATE TABLE event_session (
     cancelled boolean DEFAULT false
 );
 
-CREATE session_change_log (
+CREATE TABLE session_change_log (
 	session_change_log_id SERIAL,
 	fk_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL,
