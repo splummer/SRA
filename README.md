@@ -12,6 +12,7 @@ Download codeigniter (CodeIgniter_2.1.0 currently) zip, just google it.
 Unzip codeigniter somewhere, and steal the contents of the /system/ folder within it. Copy everything in /system/*, and paste those folders into SRA's /system/ folder to form the running core of codeigniter for SRA. (Only the /system/libraries/Zend folder need be retained)
 
 Create Database:
+
 * createdb sra;
 * createlang plpgsql sra;
 * psql sra < schema/tank_auth_schema.sql
@@ -23,6 +24,7 @@ createuser -P -d -a -e dev
 
 
 Modify configs files:
+
 * ln -s gitignore.dist .gitignore (or copy gitignore.dist to gitignore)
 * cp htaccess.dist .htaccess
 * cp application/config/config.php.dist application/config/config.php
