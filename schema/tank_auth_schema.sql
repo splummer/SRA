@@ -62,6 +62,7 @@ CREATE TABLE user_profiles (
 	phone character varying(12),
 	website varchar(255) DEFAULT NULL,
 	twitter varchar(20),
+	image varchar(64),
 	over13 boolean DEFAULT true NOT NULL,
 	contact_attend boolean DEFAULT true NOT NULL,
 	contact_any boolean DEFAULT false NOT NULL,
