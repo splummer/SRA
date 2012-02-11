@@ -122,6 +122,9 @@ I am using a hybrid of these three tutorials
 * **Link:** http://www.alistapart.com/articles/building-twitter-bootstrap/
 * **Link:** https://github.com/twitter/bootstrap/issues/445
 
+#### Page for fancy bootstrap buttons
+* **Link:** http://charliepark.org/bootstrap_buttons/
+
 ### Mailchimp with codeigniter:
 
 * **Link:** https://github.com/codepotato/codeigniter-mailchimp-api
