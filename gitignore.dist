@@ -1,0 +1,6 @@
+.gitignore
+.htaccess
+system/
+captcha/
+application/config/config.php
+application/config/database.php
