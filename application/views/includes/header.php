@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title><?php echo ( isset( $title ) ) ? $title : 'Title Blank' ; ?></title>
+    <title><?php echo ( isset( $title ) ) ? $title.' Squirrel Registration Authority' : 'Squirrel Registration Authority' ; ?></title>
     <meta name="description" content="">
     <meta name="author" content="">
 

@@ -66,7 +66,7 @@ class Zacl extends Zend_Acl
 			$perms->read == 't' ? 
 				$this->acl->allow($perms->role, $perms->resource, 'read') : 
 				$this->acl->deny($perms->role, $perms->resource, 'read');
-			$perms->create == 't' ? 
+			$perms->create_stuff == 't' ? 
 				$this->acl->allow($perms->role, $perms->resource, 'create') : 
 				$this->acl->deny($perms->role, $perms->resource, 'create');
 			$perms->modify == 't' ? 
