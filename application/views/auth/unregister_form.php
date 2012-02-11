@@ -13,5 +13,5 @@ $password = array(
 		<td style="color: red;"><?php echo form_error($password['name']); ?><?php echo isset($errors[$password['name']])?$errors[$password['name']]:''; ?></td>
 	</tr>
 </table>
-<?php echo form_submit('cancel', 'Delete account'); ?>
+<?php echo form_submit('cancel', 'Delete account', 'class="btn-primary"'); ?>
 <?php echo form_close(); ?>

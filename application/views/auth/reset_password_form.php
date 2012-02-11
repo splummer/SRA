@@ -25,5 +25,5 @@ $confirm_new_password = array(
 		<td style="color: red;"><?php echo form_error($confirm_new_password['name']); ?><?php echo isset($errors[$confirm_new_password['name']])?$errors[$confirm_new_password['name']]:''; ?></td>
 	</tr>
 </table>
-<?php echo form_submit('change', 'Change Password'); ?>
+<?php echo form_submit('change', 'Change Password', 'class="btn-primary"'); ?>
 <?php echo form_close(); ?>

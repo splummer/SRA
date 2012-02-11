@@ -25,5 +25,5 @@ $email = array(
 		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 	</tr>
 </table>
-<?php echo form_submit('change', 'Send confirmation email'); ?>
+<?php echo form_submit('change', 'Send confirmation email', 'class="btn-primary"'); ?>
 <?php echo form_close(); ?>

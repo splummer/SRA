@@ -15,5 +15,5 @@ $email = array(
 		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 	</tr>
 </table>
-<?php echo form_submit('send', 'Send'); ?>
+<?php echo form_submit('send', 'Send', 'class="btn-primary"'); ?>
 <?php echo form_close(); ?>
