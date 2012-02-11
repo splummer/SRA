@@ -8,9 +8,8 @@ Ideally it will be a system provided hosted convention management for many diffe
 Install Steps
 -------------
 
-Download codeigniter (CodeIgniter_2.1.0 currently) zip, just google it.
-Unzip codeigniter somewhere, and steal the contents of the /system/ folder within it. Copy everything in /system/*, and paste those folders into SRA's /system/ folder to form the running core of codeigniter for SRA.
-(Only the /system/libraries/Zend folder need be retained)
+Download codeigniter (CodeIgniter_2.1.0 currently) zip, just google it.  
+Unzip codeigniter somewhere, and steal the contents of the /system/ folder within it. Copy everything in /system/*, and paste those folders into SRA's /system/ folder to form the running core of codeigniter for SRA. (Only the /system/libraries/Zend folder need be retained)
 
 Create Database:
   * createdb sra;
@@ -19,7 +18,7 @@ Create Database:
   * psql sra < schema/acls.sql
   * psql sra < schema/create.sql Contents of these tables is not used yet and very much in flux.
 
-optionally: create a dummy, insecure dev user for non-public development environments so that dummy password can be the one used in applications/config/database.php :
+optionally: create a dummy, insecure dev user for non-public development environments so that dummy password can be the one used in applications/config/database.php:  
 createuser -P -d -a -e dev
 
 
