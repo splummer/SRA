@@ -105,7 +105,7 @@ I am using a hybrid of these three tutorials
 * **Link:** http://lucdebrouwer.nl/adding-zend-acl-to-codeigniter/
 * **Link:** http://codeutopia.net/blog/2009/02/06/zend_acl-part-1-misconceptions-and-simple-acls/
 
-#### Zend ACL into:
+#### Zend ACL intro:
 
 * **Link:** http://framework.zend.com/manual/en/zend.acl.introduction.html
 
@@ -119,6 +119,7 @@ I am using a hybrid of these three tutorials
 
 ### Bootstrap presentation layer
 
+* **Link:** http://twitter.github.com/bootstrap/
 * **Link:** http://www.alistapart.com/articles/building-twitter-bootstrap/
 * **Link:** https://github.com/twitter/bootstrap/issues/445
 
