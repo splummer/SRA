@@ -1,4 +1,4 @@
--- This is incomplete sql file very much in development. 
+-- This is an incomplete sql file very much in development. 
 -- Most of the objects in it have not even been implemented yet.
 -- This is more of a guideline of what we may want to store.
 
