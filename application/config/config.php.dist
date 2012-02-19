@@ -23,7 +23,7 @@ $config['base_url']	= 'http://ilmyryn.dyndns.org/~plummer/sra/';
 |
 | This is the path to the asset folder for the site.
 |
-|	application/assets
+|	assets/
 |
 */
 $config['asset_path'] = 'assets/';
