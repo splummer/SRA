@@ -4,24 +4,23 @@
 
 
 CREATE TABLE organization (
-    org_id SERIAL,
+	org_id SERIAL,
 	fk_acl_resources_id INTEGER ,
-    org_name character varying(20) NOT NULL,
-    location character varying(30),
-    fk_user_id integer NOT NULL,
-    approved boolean DEFAULT false NOT NULL
+	org_name character varying(20) NOT NULL,
+	location character varying(30),
+	fk_user_id integer NOT NULL,
 );
 
 CREATE TABLE event (
-    event_id SERIAL NOT NULL,
+	event_id SERIAL NOT NULL,
 	fk_acl_resources_id INTEGER ,
-    event_name character varying(40) NOT NULL,
-    event_short_name character varying(40) NOT NULL,
-    start_time timestamp with time zone,
-    end_time timestamp with time zone,
-    session_submission boolean DEFAULT false NOT NULL,
-    pre_reg boolean DEFAULT false NOT NULL,
-    onsite_reg boolean DEFAULT false NOT NULL
+	event_name character varying(40) NOT NULL,
+	event_short_name character varying(40) NOT NULL,
+	start_time timestamp with time zone,
+	end_time timestamp with time zone,
+	session_submission boolean DEFAULT false NOT NULL,
+	pre_reg boolean DEFAULT false NOT NULL,
+	onsite_reg boolean DEFAULT false NOT NULL
 );
 
 CREATE TABLE event_timeslot (
@@ -33,28 +32,28 @@ CREATE TABLE event_timeslot (
 );
 
 CREATE TABLE session (
-    session_id SERIAL PRIMARY KEY NOT NULL,
-    fk_user_id integer NOT NULL,
+	session_id SERIAL PRIMARY KEY NOT NULL,
+	fk_user_id integer NOT NULL,
 	fk_acl_resources_id INTEGER ,
-    session_title character varying(255) NOT NULL,
-    description text,
-    min_attendees integer,
-    max_attendees integer,
-    difficulty character varying(15),
-    familiarity character varying(10),
-    pregen_chars boolean,
-    game_system character varying(50),
-    cost numeric(6,2),
-    equipment character varying(100),
-    notes text,
-    created timestamp with time zone,
-    modified timestamp with time zone,
-    maturity character(1),
-    event_type character varying(25),
-    approved boolean DEFAULT false, 
-    show_change boolean DEFAULT false,
-    featured boolean DEFAULT false,
-    display_org boolean DEFAULT false
+	session_title character varying(255) NOT NULL,
+	description text,
+	min_attendees integer,
+	max_attendees integer,
+	difficulty character varying(15),
+	familiarity character varying(10),
+	pregen_chars boolean,
+	game_system character varying(50),
+	cost numeric(6,2),
+	equipment character varying(100),
+	notes text,
+	created timestamp with time zone,
+	modified timestamp with time zone,
+	maturity character(1),
+	event_type character varying(25),
+	approved boolean DEFAULT false, 
+	show_change boolean DEFAULT false,
+	featured boolean DEFAULT false,
+	display_org boolean DEFAULT false
 );
 
 CREATE TABLE event_session (
@@ -65,14 +64,14 @@ CREATE TABLE event_session (
 	fk_timeslot_id integer,
 	start_time timestamp with time zone NOT NULL,
 	end_time timestamp with time zone NOT NULL,
-    cancelled boolean DEFAULT false
+	cancelled boolean DEFAULT false
 );
 
 CREATE TABLE session_change_log (
 	session_change_log_id SERIAL,
 	fk_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL,
-    change_description text,
+	change_description text,
 	created timestamp with time zone DEFAULT now()
 );
 
@@ -85,33 +84,33 @@ CREATE TABLE gm (
 CREATE TABLE event_resources (
 	resource_id SERIAL,
 	resource_type character varying (45) NOT NULL,
-    resource_name character varying(155) NOT NULL
+	resource_name character varying(155) NOT NULL
 );
 
 -- This whole permissions section is not needed due to ZendACL tables in separate acl.sql
 CREATE TABLE role (
-    role_id SERIAL,
-    role_name character varying(100) NOT NULL,
-    Description character varying (255)
+	role_id SERIAL,
+	role_name character varying(100) NOT NULL,
+	Description character varying (255)
 );
 
 CREATE TABLE permission (
-    perm_id SERIAL,
-    perm_name character varying(15) NOT NULL,
-    description character varying (255)
+	perm_id SERIAL,
+	perm_name character varying(15) NOT NULL,
+	description character varying (255)
 );
 
 CREATE TABLE rp_lookup (
 	rp_lookup_id SERIAL NOT NULL,
-    fk_role_id integer NOT NULL,
-    fk_perm_id integer NOT NULL
+	fk_role_id integer NOT NULL,
+	fk_perm_id integer NOT NULL
 );
 
 CREATE TABLE uco_role_lookup (
-    fk_user_id integer,
-    fk_event_id integer,
-    fk_org_id integer,
-    fk_role_id integer NOT NULL
+	fk_user_id integer,
+	fk_event_id integer,
+	fk_org_id integer,
+	fk_role_id integer NOT NULL
 );
 
 COMMENT ON COLUMN session.approved IS 'Approved and featured fields should be an event specific flag';
