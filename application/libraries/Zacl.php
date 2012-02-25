@@ -123,7 +123,9 @@ class Zacl extends Zend_Acl
 
 	/*
 	 * Methods to query the ACL. These need work I think, for one they do not check all
-	 * all of a user's roles.
+	 * all of a user's roles. I believe they will return the value of the most specific
+	 * role. So if a user is a superadmin site wide but specifically disallowed a certain
+	 * resource it will return false.
 	 */
  
 	function can_read($resource, $role) {
