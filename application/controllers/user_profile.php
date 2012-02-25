@@ -13,7 +13,7 @@ class User_profile extends CI_Controller {
 	{
 		parent::__construct();
 
-		$this->load->helper(array('form', 'url', 'array'));
+		$this->load->helper(array('form', 'array'));
 		$this->load->library('form_validation');
 		$this->load->library('tank_auth');
 		$this->load->model('user_profile_model');
