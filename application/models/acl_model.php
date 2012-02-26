@@ -55,14 +55,14 @@ class Acl_model extends CI_Model
 	 * add_resource - Add a record to the resource table and return the new acl_resource_id
 	 * 
 	 * @param	 - array
-	 * @return	 - array
+	 * @return	 - int
 	 * 
 	 */
 	function add_resource($data)
 	{
 		$this->db->insert($this->acl_resources_table, $data);
 		$acl_resource_id = $this->db->insert_id();
-		return array('acl_resource_id' => $acl_resource_id);
+		return $acl_resource_id;
 	}
 
 
