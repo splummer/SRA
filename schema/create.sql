@@ -4,7 +4,7 @@
 
 
 CREATE TABLE organization (
-	org_id SERIAL,
+	org_id SERIAL PRIMARY KEY NOT NULL,
 	fk_acl_resources_id INTEGER ,
 	org_name character varying(20) NOT NULL,
 	location character varying(30),
@@ -12,15 +12,17 @@ CREATE TABLE organization (
 );
 
 CREATE TABLE event (
-	event_id SERIAL NOT NULL,
+	event_id SERIAL PRIMARY KEY NOT NULL,
 	fk_acl_resources_id INTEGER ,
-	event_name character varying(40) NOT NULL,
-	event_short_name character varying(40) NOT NULL,
+	name character varying(40) NOT NULL,
+	short_name character varying(12) NOT NULL,
+	description character varying(255),
 	start_time timestamp with time zone,
 	end_time timestamp with time zone,
 	session_submission boolean DEFAULT false NOT NULL,
 	pre_reg boolean DEFAULT false NOT NULL,
-	onsite_reg boolean DEFAULT false NOT NULL
+	onsite_reg boolean DEFAULT false NOT NULL,
+	created timestamp with time zone NOT NULL DEFAULT now()
 );
 
 CREATE TABLE event_timeslot (
@@ -28,7 +30,7 @@ CREATE TABLE event_timeslot (
 	fk_event_id integer NOT NULL,
 	timeslot_name character varying(155) NOT NULL,
 	start_time timestamp with time zone NOT NULL,
-	end_time timestamp with time zone NOT NULL 
+	duration interval NOT NULL 
 );
 
 CREATE TABLE session (
@@ -46,7 +48,7 @@ CREATE TABLE session (
 	cost numeric(6,2),
 	equipment character varying(100),
 	notes text,
-	created timestamp with time zone,
+	created timestamp with time zone NOT NULL,
 	modified timestamp with time zone,
 	maturity character(1),
 	event_type character varying(25),
@@ -57,7 +59,7 @@ CREATE TABLE session (
 );
 
 CREATE TABLE event_session (
-	event_session_id SERIAL,
+	event_session_id SERIAL PRIMARY KEY ,
 	fk_event_id integer NOT NULL,
 	fk_session_id integer NOT NULL,
 	fk_resource_id integer NOT NULL,
@@ -68,7 +70,7 @@ CREATE TABLE event_session (
 );
 
 CREATE TABLE session_change_log (
-	session_change_log_id SERIAL,
+	session_change_log_id SERIAL PRIMARY KEY ,
 	fk_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL,
 	change_description text,
@@ -76,13 +78,13 @@ CREATE TABLE session_change_log (
 );
 
 CREATE TABLE gm (
-	gm_id SERIAL,
+	gm_id SERIAL PRIMARY KEY ,
 	event_session_id integer NOT NULL,
 	fk_user_id integer NOT NULL
 );
 
 CREATE TABLE event_resources (
-	resource_id SERIAL,
+	resource_id SERIAL PRIMARY KEY ,
 	resource_type character varying (45) NOT NULL,
 	resource_name character varying(155) NOT NULL
 );

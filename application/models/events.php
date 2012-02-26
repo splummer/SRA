@@ -15,7 +15,7 @@
 class events extends CI_Model 
 {
 
-	private $event_table_name				= 'events';			// events
+	private $event_table_name				= 'event';			// events
 	private $event_timeslot_name	= 'event_timeslot';	// look up table of events to timeslots
 
 	function __construct()
@@ -58,13 +58,16 @@ class events extends CI_Model
 		// First we need to create a resource in the ACL table for this event.
 		// Make an array of resource info
 		$event_resource = array(
-			'name' 			=> "data['event_name']", 
-			'description'	=> "data['event_description']",
-			'parentID'		=> "data['org_id_resource_id']" // this may not get passed
+			'name' 			=> $data['name'], 
+			'description'	=> $data['description'],
 		);
-		if ($this->acl_model->add_resource($event_resource)) {
-			$data['fk_acl_resources_id'] = $this->db->insert_id();
-		} else { // if we could not create the event resource return null
+		if (isset($data['org_id_resource_id'])) {
+			$event_resource['parentid'] = $data['org_id_resource_id'] ;
+		}
+
+		$data['fk_acl_resources_id'] = $this->acl_model->add_resource($event_resource);
+
+		if (!isset($data['fk_acl_resources_id']) OR $data['fk_acl_resources_id'] == '0') {
 			return NULL;
 		}
 

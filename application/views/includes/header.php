@@ -13,6 +13,7 @@
 
     <!-- Le styles -->
     <link href="<?php echo asset_url();?>css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/bootstrap-datepicker.css" rel="stylesheet">
     <link href="<?php echo asset_url();?>css/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">
       body {
@@ -71,9 +72,9 @@
               </ul>
             </div> <!-- /well -->
             <div class="well">
-              <h5>Sidebar</h5>
+              <h5>Event Stuff</h5>
               <ul>
-                <li><a href="#">Link</a></li>
+                <li><?php echo anchor('event/create', 'Create Event'); ?></li>
                 <li><a href="#">Link</a></li>
                 <li><a href="#">Link</a></li>
                 <li><a href="#">Link</a></li>

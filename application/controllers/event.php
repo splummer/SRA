@@ -32,6 +32,7 @@ class Event extends CI_Controller {
 		$this->form_validation->set_rules('short_name', 'Event Short Name', 'trim|required|max_length[12]');
 		$this->form_validation->set_rules('description', 'Event Name', 'trim|required|max_length[255]');
 
+
 		if( ! $this->form_validation->run())
 		{
 	
@@ -41,12 +42,20 @@ class Event extends CI_Controller {
 		}
 		else
 		{
-			$data['profile_info'] = array (
-				'name' => $this->input->post('name'),
-				'short_name' => url_title($this->input->post('short_name'), underscore),
-				'description' => $this->input->post('description'),
+			$data['event_info'] = array (
+				'name' 			=> $this->input->post('name'),
+				'short_name' 	=> url_title($this->input->post('short_name'), 'underscore'),
+				'description' 	=> $this->input->post('description'),
+				'start_time' 	=> $this->input->post('start_date') . ' ' . $this->input->post('start_time') . ' EDT',
+				'end_time'		=> $this->input->post('end_date') . ' ' . $this->input->post('end_time') . ' EDT',
 			);
-			redirect('event/event_id');
+
+			$this->events->create_event($data['event_info']);
+
+			echo '<pre>';
+			print_r ($data);
+			echo '</pre>';
+			//redirect('event/event_id');
 		}
 	}
 	}
