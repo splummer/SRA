@@ -61,6 +61,7 @@ class events extends CI_Model
 			'name' 			=> $data['name'], 
 			'description'	=> $data['description'],
 		);
+		// parentID could be blank if we inserting nothing is fine, inserting a non existent parentid will break things. 
 		if (isset($data['org_id_resource_id'])) {
 			$event_resource['parentid'] = $data['org_id_resource_id'] ;
 		}
