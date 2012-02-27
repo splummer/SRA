@@ -21,6 +21,22 @@ class Event extends CI_Controller {
 	}
 
 	/**
+	 * Display - Show an event
+	 * 
+	 * @param 	Int
+	 * 
+	 */
+	function index($event = '')
+	{
+		is_numeric($event)? $event_search = array('event_id' => $event) : $event_search = array('short_name' => $event);;
+		$data = $this->events->get_event($event_search);
+
+		$data['main_view'] = 'event/event_display';
+		$data['title'] = $data['name'];
+		$this->load->view('includes/template', $data);
+	}
+
+	/**
 	 * Create event - Presents the event form to create a new event
 	 * 
 	 * @param	 int
@@ -58,7 +74,32 @@ class Event extends CI_Controller {
 			//redirect('event/event_id');
 		}
 	}
+
+	/**
+	 * Update Event - Updates an event ID
+	 * 
+	 * @param 	Int
+	 * @return	
+	 * 
+	 */
+	function update($event_id = '')
+	{
+		$this->form_validation->set_rules('name', 'Event Name', 'trim|required|max_length[40]');
+		$this->form_validation->set_rules('short_name', 'Event Short Name', 'trim|required|max_length[12]');
+		$this->form_validation->set_rules('description', 'Event Name', 'trim|required|max_length[255]');
+
+		if( ! $this->form_validation->run())
+		{
+	
+			$data['main_view'] = 'event/event_form';
+			$data['title'] = 'Create Event';
+			$this->load->view('includes/template', $data);
+		}
+		else {}
+
+
 	}
+}
 
 /* End of file event.php */
 /* Location: ./application/controllers/event.php */

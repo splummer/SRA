@@ -28,15 +28,15 @@ class events extends CI_Model
 	}
 
 	/**
-	 * Get Event Info - Get the event information for the event id we are passed.
+	 * Get Event Info - Get the event information for the array values we are passed.
 	 * 
-	 * @param	int
-	 * @return	object
+	 * @param	array
+	 * @return	array
 	 * 
 	 */
-	function get_event($event_id)
+	function get_event($data)
 	{
-		$this->db->where('event_id', $event_id);
+		$this->db->where($data);
 		$query = $this->db->get($this->event_table_name);
 				
 		if ($query->num_rows() == 1) return $query->row_array();
@@ -44,13 +44,12 @@ class events extends CI_Model
 	}
 
 	/**
-	 * Create Evene - This creates a new event
+	 * Create Evene - Creates a new event
 	 * 
 	 * @param 	array
 	 * @return	int
 	 * 
 	 */
-
 	function create_event($data)
 	{
 		$data['created'] = date('Y-m-d H:i:s');
@@ -87,7 +86,7 @@ class events extends CI_Model
 	 * @return	bool
 	 * 
 	 */
-	function update_user_profile($event_id, $data)
+	function update_event($event_id, $data)
 	{
 		$this->db->where('event_id', $event_id);
 		$this->db->update($this->event_table_name, $data);
