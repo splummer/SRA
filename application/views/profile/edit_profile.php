@@ -1,12 +1,16 @@
 <?php $this->load->view('includes/user_profile_pills'); ?>
 <?php
+
+// Make required fields have a required attribute to not waste the submitter's time.
+
 $first_name = array (
 	'name'		=>	'first_name',
 	'id'		=>	'first_name',
 	'value' 	=>	set_value('first_name', $user_profile['first_name']),
 	'maxlength'	=>	'25',
 	'class'		=>	'span4',
-	'placeholder' =>	'First Name'
+	'placeholder' =>	'First Name',
+	'required' => 'required'
 );
 $last_name = array (
 	'name'		=>	'last_name',
@@ -14,7 +18,8 @@ $last_name = array (
 	'value' 	=>	set_value('last_name', $user_profile['last_name']),
 	'maxlength'	=>	'25',
 	'class'		=>	'span4',
-	'placeholder' =>	'Last Name'
+	'placeholder' =>	'Last Name',
+	'required' => 'required'
 );
 $nickname = array (
 	'name'		=>	'nickname',
@@ -48,7 +53,8 @@ $city = array (
 	'class'		=>	'span2',
 	'placeholder' =>	'city'
 );
-$state_params = 'class=mediumSelect' ;
+$state_params = 'class=mediumSelect required=required' ; 
+// Note that this won't act as required until we resolve having "null" as the value for the first/blank option.
 $zip = array (
 	'name'		=>	'zip',
 	'id'		=>	'zip',

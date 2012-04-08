@@ -4,18 +4,21 @@ $old_password = array(
 	'id'	=> 'old_password',
 	'value' => set_value('old_password'),
 	'size' 	=> 30,
+	'required' => 'required',
 );
 $new_password = array(
 	'name'	=> 'new_password',
 	'id'	=> 'new_password',
 	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
 	'size'	=> 30,
+	'required' => 'required',
 );
 $confirm_new_password = array(
 	'name'	=> 'confirm_new_password',
 	'id'	=> 'confirm_new_password',
 	'maxlength'	=> $this->config->item('password_max_length', 'tank_auth'),
 	'size' 	=> 30,
+	'required' => 'required',
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
