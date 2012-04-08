@@ -30,7 +30,8 @@ $start_date = array (
 	'value' 	=>	set_value('start_date', isset($event['start_date'])),
 	'class'		=>	'span2',
 	'data-datepicker'	=>	'datepicker',
-	'placeholder' =>	date('m/d/Y')
+	'placeholder' =>	date('m/d/Y'),
+	'type' => 'date'
 );
 $start_time = array (
 	'name'		=>	'start_time',
