@@ -17,12 +17,26 @@
     <link href="<?php echo asset_url();?>css/bootstrap-responsive.css" rel="stylesheet">
     <style type="text/css">
       body {
-        padding-top: 60px;
+        padding-top: 5px;
         padding-bottom: 40px;
       }
       .sidebar-nav {
         padding: 9px 0;
       }
+      
+      /* Dev styles just to make the header usable while starting out */
+      .span2{
+      	float:right;
+      	width:10em;
+      	height:10em;
+      	margin-left:2em;
+      }
+      .nav-collapse li{
+      	display:inline-block;
+      	min-width:5em;
+      }
+      
+      
     </style>
 
     <!-- Le fav and touch icons -->
@@ -35,7 +49,7 @@
 <!-- id=<?php echo $this->router->fetch_class() . '-' . $this->router->fetch_method(); ?>" class="<?php echo $this->router->fetch_class(); ?>-controller <?php echo $this->router->fetch_method(); ?>-method -->
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fixed-top" role='navigation'>
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -49,6 +63,7 @@
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
+              <li><a href="#news">News</a></li>
             </ul>
             <p class="navbar-text pull-right">
             <?php echo ( $this->tank_auth->is_logged_in() ) ? 'Logged in as ' . anchor('user_profile', $this->session->userdata('username')) . ' | ' . anchor('/auth/logout/', 'Logout') : anchor('auth/login', 'Login') ; ?>
@@ -61,7 +76,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-          <div class="sidebar-nav">
+          <div class="sidebar-nav" role="navigation">
             <div class="well">
               <h5>Sidebar</h5>
               <ul>
@@ -73,7 +88,7 @@
               <h5>Event Stuff</h5>
               <ul>
                 <li><?php echo anchor('event/create', 'Create Event'); ?></li>
-                <li><a href="#">Link</a></li>
+                <li><?php echo anchor('event/list', 'Event List'); ?></li>
               </ul>
               <h5>Sidebar</h5>
               <ul>
